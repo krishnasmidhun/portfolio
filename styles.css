@@ -585,7 +585,7 @@ a {
   content: "";
   position: absolute;
   left: 0;
-  top: .75em;
+  top: 1em;
   width: 12px;
   height: 12px;
   background: currentColor;
