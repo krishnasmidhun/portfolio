@@ -12,10 +12,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const updateHeader = () => {
     if (!header) return;
     const currentScrollY = window.scrollY;
-    header.classList.toggle('is-scrolled', currentScrollY > 18);
     if (currentScrollY < 20 || currentScrollY < lastScrollY - 8 || nav?.classList.contains('is-open')) {
       header.classList.remove('is-hidden');
-    } else if (currentScrollY > lastScrollY + 8 && currentScrollY > 80) {
+    } else if (currentScrollY > lastScrollY + 8 && currentScrollY > 18) {
       header.classList.add('is-hidden');
     }
     lastScrollY = currentScrollY;
