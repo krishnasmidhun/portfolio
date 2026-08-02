@@ -2182,6 +2182,7 @@ textarea {
 }
 
 .board-footer strong span {
+  margin-left: 5px;
   font-size: 11px;
   letter-spacing: 0;
 }
