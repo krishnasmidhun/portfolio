@@ -5,24 +5,13 @@ document.addEventListener('DOMContentLoaded', () => {
   const nav = document.querySelector('[data-nav]');
   const toggle = document.querySelector('[data-nav-toggle]');
 
-  let lastScrollY = window.scrollY;
-  let headerFrame = 0;
-  const updateHeader = () => {
-    if (!header || headerFrame) return;
-    headerFrame = requestAnimationFrame(() => {
-      headerFrame = 0;
-      const currentScrollY = window.scrollY;
-      header.classList.toggle('is-scrolled', currentScrollY > 18);
-      if (currentScrollY < 20 || currentScrollY < lastScrollY - 8 || nav?.classList.contains('is-open')) {
-        header.classList.remove('is-hidden');
-      } else if (currentScrollY > lastScrollY + 8 && currentScrollY > 80) {
-        header.classList.add('is-hidden');
-      }
-      lastScrollY = currentScrollY;
-    });
-  };
-  updateHeader();
-  window.addEventListener('scroll', updateHeader, { passive: true });
+  const hero = document.querySelector('.section-first');
+  if (header && hero && 'IntersectionObserver' in window) {
+    const headerObserver = new IntersectionObserver(([entry]) => {
+      header.classList.toggle('is-scrolled', !entry.isIntersecting);
+    }, { rootMargin: '-20px 0px -99% 0px', threshold: 0 });
+    headerObserver.observe(hero);
+  }
 
   toggle?.addEventListener('click', () => {
     const open = toggle.getAttribute('aria-expanded') === 'true';
