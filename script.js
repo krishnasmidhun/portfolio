@@ -164,14 +164,13 @@ document.addEventListener('DOMContentLoaded', () => {
       if (pausedByUser || frameRunning) return;
       autoScrolling = true;
       frameRunning = true;
-      scrollPosition = viewport.scrollTop;
+      scrollPosition = Math.min(scrollPosition, maximum);
       lastFrame = performance.now();
       animationFrame = requestAnimationFrame(tick);
     };
 
     const pauseForInteraction = () => {
       if (pausedByUser) return;
-      scrollPosition = viewport.scrollTop;
       autoScrolling = false;
       stopFrame();
       window.clearTimeout(resumeTimer);
