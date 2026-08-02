@@ -298,6 +298,16 @@ a {
   transition: transform .2s, background .2s, color .2s;
 }
 
+.icon-arrow-up-right {
+  display: inline-block;
+  width: .9em;
+  height: .9em;
+  flex: 0 0 .9em;
+  background: currentColor;
+  -webkit-mask: url("assets/icons/arrow-up-right-from-square.svg") center / contain no-repeat;
+  mask: url("assets/icons/arrow-up-right-from-square.svg") center / contain no-repeat;
+}
+
 .button:hover {
   transform: translateY(-2px);
 }
@@ -572,9 +582,15 @@ a {
 
 .service-card li::before,
 .case-study li::before {
-  content: "↗";
+  content: "";
   position: absolute;
   left: 0;
+  top: .75em;
+  width: 12px;
+  height: 12px;
+  background: currentColor;
+  -webkit-mask: url("assets/icons/arrow-up-right-from-square.svg") center / contain no-repeat;
+  mask: url("assets/icons/arrow-up-right-from-square.svg") center / contain no-repeat;
 }
 
 .diagram-section {
