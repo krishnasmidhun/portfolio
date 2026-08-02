@@ -31,3 +31,6 @@ content.md
 # Codex and local tooling metadata
 .codex/
 .openai/
+
+# Local revision checklist for Codex and other agents
+READ_BEFORE_PROMPT_RUN.md
