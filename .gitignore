@@ -1,0 +1,33 @@
+# Local development and dependency output
+node_modules/
+vendor/
+dist/
+build/
+.cache/
+.parcel-cache/
+
+# Environment and secret files
+.env
+.env.*
+!.env.example
+*.local
+
+# Operating system and editor files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.idea/
+.vscode/
+
+# Logs and temporary files
+*.log
+*.tmp
+*.temp
+
+# Project notes not used by the Cloudflare Pages site
+content.md
+
+# Codex and local tooling metadata
+.codex/
+.openai/

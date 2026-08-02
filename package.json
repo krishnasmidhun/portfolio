@@ -1,0 +1,9 @@
+{
+  "name": "midhun-professional-portfolio",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Static Cloudflare Pages portfolio for Midhun",
+  "scripts": {
+    "preview": "python3 -m http.server 8080"
+  }
+}
