@@ -1,3 +1,6 @@
+const stylesheet = document.querySelector('#main-stylesheet');
+if (stylesheet) stylesheet.rel = 'stylesheet';
+
 document.documentElement.classList.add('js');
 
 document.addEventListener('DOMContentLoaded', () => {
