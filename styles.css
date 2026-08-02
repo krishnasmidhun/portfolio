@@ -1,4 +1,12 @@
 /* Midhun portfolio — dependency-free, Cloudflare Pages ready */
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400 800;
+  font-display: swap;
+  src: url("assets/fonts/inter-latin.woff2") format("woff2");
+}
+
 :root {
   --ink: #0a0a0a;
   --paper: #ffffff;
