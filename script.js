@@ -6,16 +6,20 @@ document.addEventListener('DOMContentLoaded', () => {
   const toggle = document.querySelector('[data-nav-toggle]');
 
   let lastScrollY = window.scrollY;
+  let headerFrame = 0;
   const updateHeader = () => {
-    if (!header) return;
-    const currentScrollY = window.scrollY;
-    header.classList.toggle('is-scrolled', currentScrollY > 18);
-    if (currentScrollY < 20 || currentScrollY < lastScrollY - 8 || nav?.classList.contains('is-open')) {
-      header.classList.remove('is-hidden');
-    } else if (currentScrollY > lastScrollY + 8 && currentScrollY > 80) {
-      header.classList.add('is-hidden');
-    }
-    lastScrollY = currentScrollY;
+    if (!header || headerFrame) return;
+    headerFrame = requestAnimationFrame(() => {
+      headerFrame = 0;
+      const currentScrollY = window.scrollY;
+      header.classList.toggle('is-scrolled', currentScrollY > 18);
+      if (currentScrollY < 20 || currentScrollY < lastScrollY - 8 || nav?.classList.contains('is-open')) {
+        header.classList.remove('is-hidden');
+      } else if (currentScrollY > lastScrollY + 8 && currentScrollY > 80) {
+        header.classList.add('is-hidden');
+      }
+      lastScrollY = currentScrollY;
+    });
   };
   updateHeader();
   window.addEventListener('scroll', updateHeader, { passive: true });
@@ -107,7 +111,19 @@ document.addEventListener('DOMContentLoaded', () => {
     let animationFrame = 0;
     let frameRunning = false;
     let resumeTimer = 0;
-    const speed = () => window.matchMedia('(max-width: 760px)').matches ? 28 : 24;
+    const speed = window.matchMedia('(max-width: 760px)').matches ? 28 : 24;
+    let maximum = 0;
+
+    const updateMaximum = () => {
+      maximum = Math.max(0, viewport.scrollHeight - viewport.clientHeight);
+      scrollPosition = Math.min(scrollPosition, maximum);
+    };
+
+    image.addEventListener('load', updateMaximum, { once: true });
+    if (image.complete) updateMaximum();
+    if ('ResizeObserver' in window) {
+      new ResizeObserver(updateMaximum).observe(viewport);
+    }
 
     const updateButton = () => {
       if (!button) return;
@@ -132,10 +148,8 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!lastFrame) lastFrame = now;
       const elapsed = Math.min(now - lastFrame, 50) / 1000;
       lastFrame = now;
-      const maximum = Math.max(0, viewport.scrollHeight - viewport.clientHeight);
-
       if (maximum > 0 && now >= endPauseUntil) {
-        const next = scrollPosition + direction * speed() * elapsed;
+        const next = scrollPosition + direction * speed * elapsed;
         if (next >= maximum) {
           scrollPosition = maximum;
           viewport.scrollTop = scrollPosition;
